@@ -13,7 +13,7 @@ if __name__ == '__main__':
     exit_code = os.system('pip freeze > requirements.txt')
     command = ' '.join([
         f'gcloud functions deploy {SERVICE_NAME}',
-        '--entry-point resize',
+        '--entry-point main',
         '--runtime python39',
         '--trigger-http',
         '--memory 256MB',

@@ -3,6 +3,10 @@ from PIL import Image
 from google.cloud import storage
 from io import BytesIO
 from flask import abort, jsonify, make_response
+import logging
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 # you can add new mimes from here https://www.sitepoint.com/mime-types-complete-list/
 # name of formats https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
@@ -18,26 +22,17 @@ MIMES_ALLOWED = {
 }
 
 
-def resize(request):
+def shape_of_image(request):
     data = request.get_json(force=True)
 
-    print(data)
     if not 'filename' in data:
         return make_response(jsonify({'message': 'Incorrect filename', 'status_code': 400}), 400)
 
     if not 'bucket' in data:
         return make_response(jsonify({'message': 'Incorrect bucket', 'status_code': 400}), 400)
 
-    if (not 'width' in data or not data['width']) and (not 'height' in data or not data['height']):
-        return make_response(jsonify({'message': 'Incorrect width or height', 'status_code': 400}), 400)
-
     bucket = data['bucket']
     filename = data['filename']
-    width = int(data['width']) if 'width' in data and data['width'] else None
-    height = int(data['height']) if 'height' in data and data['height'] else None
-
-    if filename.endswith('-thumbnail'):
-        return make_response(jsonify({'message': 'Can\'t resize a thumbnail', 'status_code': 200}), 200)
 
     client = storage.Client()
     bucket = client.bucket(bucket)
@@ -47,42 +42,38 @@ def resize(request):
         content = f.read()
         mime = magic.from_buffer(content, mime=True)
 
-        if mime in MIMES_ALLOWED:
-            extension = MIMES_ALLOWED[mime]
-
-        else:
+        if mime not in MIMES_ALLOWED:
             return make_response(jsonify({'message': 'File type not allowed', 'status_code': 400}), 400)
 
         image = Image.open(f)
-        current_width, current_height = image.size
 
-        # Aspect ratio
-        width_divide_by_height = current_width / current_height
-        height_divide_by_width = current_height / current_width
+    width, height = image.size
 
-        if width and not height:
-            height = round(width * height_divide_by_width)
+    if width == height:
+        orientation = 'Simetrical'
+        shape = 'Square'
+    elif width > height:
+        orientation = 'Landscape'
+        shape = 'Rectangle'
+    else:
+        orientation = 'Portrait'
+        shape = 'Rectangle'
 
-        elif not width and height:
-            width = round(height * width_divide_by_height)
+    logger.info(f'{filename} has the shape {shape} and the orientation {orientation}')
+    return make_response(jsonify({
+        'shape': shape,
+        'orientation': orientation,
+        'status_code': 200,
+        'width': width,
+        'height': height,
+    }), 200)
 
-        size = (width, height)
-        image = image.resize(size)
-        filename = f'{filename}-{width}x{height}'
+def main(request):
+    starts = datetime.now()
+    value = shape_of_image(request)
+    ends = datetime.now()
 
-    with BytesIO() as output:
-        image.save(output, format=extension)
-        contents = output.getvalue()
+    diff = ends - starts
+    logger.info(f'Response in {diff.microseconds / 1000} ms')
 
-        content = output.read()
-
-        blob = bucket.blob(filename)
-        blob.upload_from_string(contents)
-
-        print(f'{filename} was generated')
-        return make_response(jsonify({
-            'message': 'Ok',
-            'status_code': 200,
-            'width': width,
-            'height': height,
-        }), 200)
+    return value
