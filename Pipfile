@@ -7,8 +7,16 @@ name = "pypi"
 pillow = "*"
 google-cloud-storage = "*"
 python-magic = "*"
+numpy = "*"
 
 [dev-packages]
+pytest = "*"
+flask = "*"
+google-cloud-storage = "*"
+functions-framework = "*"
+yapf = "*"
+faker = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.10"
@@ -16,3 +24,4 @@ python_version = "3.10"
 [scripts]
 makerequeriments="pip freeze > requirements.txt"
 deploy="python -m scripts.deploy"
+cov="python -m scripts.coverage"
