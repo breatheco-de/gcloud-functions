@@ -1,6 +1,6 @@
-FROM gitpod/workspace-postgres
+FROM gitpod/workspace-full
 
-RUN pyenv update && pyenv install 3.10.2 && pyenv global 3.10.2
+RUN pyenv update && pyenv install 3.10.5 && pyenv global 3.10.5
 RUN pip install pipenv yapf
 
 # remove PIP_USER environment
