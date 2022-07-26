@@ -11,7 +11,7 @@ tasks:
   - init: |
       python -m scripts.install
       gp sync-done deps
-    command: functions-framework --target main --debug
+    command: pipenv run functions-framework --target main --debug
   - init: gp sync-await deps
 
 vscode:
