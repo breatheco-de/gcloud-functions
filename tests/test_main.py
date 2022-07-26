@@ -5,7 +5,6 @@ from src import main
 
 
 class FileContent:
-
     def __init__(self, file):
         self.file = file
 

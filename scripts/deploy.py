@@ -2,7 +2,6 @@
 import os
 import sys
 
-
 if __name__ == '__main__':
     SERVICE_NAME = os.getenv('SERVICE_NAME', '')
     BUCKET_NAME = os.getenv('BUCKET_NAME', '')

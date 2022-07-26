@@ -4,7 +4,6 @@ __all__ = ['File']
 
 
 class File:
-
     @staticmethod
     def get_file(bucket_name, filename):
         client = storage.Client()
