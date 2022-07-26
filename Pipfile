@@ -3,6 +3,24 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+makerequeriments="pip freeze > requirements.txt"
+deploy="python -m scripts.deploy"
+format="pre-commit run --all-files"
+test="pytest --disable-pytest-warnings"
+ptest="pytest --disable-pytest-warnings -n auto"
+ptest_ci="pytest --disable-pytest-warnings -n auto"
+coverage="python -m scripts.coverage"
+pcoverage="python -m scripts.parallel_coverage"
+cov="python -m scripts.coverage"
+pcov="python -m scripts.parallel_coverage"
+coverage_ci="pytest --disable-pytest-warnings --cov=src --cov-report xml"
+pcov_ci="pytest --disable-pytest-warnings --cov=src --cov-report xml -n auto"
+lint="pre-commit run"
+docs="mkdocs serve --livereload"
+generate_docs="mkdocs build"
+docs_deploy="mkdocs gh-deploy -c"
+
 [packages]
 pillow = "*"
 google-cloud-storage = "*"
@@ -17,11 +35,13 @@ functions-framework = "*"
 yapf = "*"
 faker = "*"
 pytest-cov = "*"
+coverage = "*"
+coveralls = "*"
+pre-commit = "*"
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocstrings = "*"
+pytest-xdist = "*"
 
 [requires]
 python_version = "3.10"
-
-[scripts]
-makerequeriments="pip freeze > requirements.txt"
-deploy="python -m scripts.deploy"
-cov="python -m scripts.coverage"
