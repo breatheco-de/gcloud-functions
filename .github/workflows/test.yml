@@ -32,7 +32,7 @@ jobs:
           pipenv run pcov_ci
 
       - uses: codecov/codecov-action@v1
-        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/apiv2' }}
+        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/shape-of-image' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           files: ./coverage.xml # optional
@@ -42,7 +42,7 @@ jobs:
           verbose: true # optional (default = false)
 
       - name: Upload coverage data to coveralls.io
-        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/apiv2' }}
+        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/shape-of-image' }}
         run: |
           coveralls --service=github
         env:
