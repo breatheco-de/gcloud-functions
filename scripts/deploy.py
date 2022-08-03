@@ -13,7 +13,7 @@ if __name__ == '__main__':
     command = ' '.join([
         f'gcloud functions deploy {SERVICE_NAME}',
         '--entry-point main',
-        '--runtime python39',
+        '--runtime python310',
         '--trigger-http',
         '--memory 256MB',
         f'--service-account {GOOGLE_CLOUD_SERVICE_ACCOUNT}',
