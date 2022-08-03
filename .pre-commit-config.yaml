@@ -1,12 +1,9 @@
 repos:
-  # - repo: local
-  #   hooks:
-  #     - id: yapf
-  #       name: yapf
-  #       language: python
-  #       entry: yapf
-  #       args: [-i, -vv]
-  #       types: [python]
+  - repo: https://github.com/jefer94/pre-commit-hooks
+    rev: "0f742804e8a2d57e3e99c9da59467850373f6549" # Use the sha / tag you want to point at
+    hooks:
+      - id: pipenv-requirements-fixer
+      - id: pipenv-dev-requirements-fixer
   - repo: https://github.com/pre-commit/mirrors-yapf
     rev: "v0.31.0" # Use the sha / tag you want to point at
     hooks:
