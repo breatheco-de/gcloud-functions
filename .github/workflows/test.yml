@@ -15,10 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.10.2
+      - name: Set up Python 3.10.5
         uses: actions/setup-python@v2
         with:
-          python-version: 3.10.2
+          python-version: 3.10.5
+          cache: 'pipenv'
 
       - name: Install dependencies
         run: |
@@ -32,7 +33,7 @@ jobs:
           pipenv run pcov_ci
 
       - uses: codecov/codecov-action@v1
-        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/shape-of-image' }}
+        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/gcloud-shape-of-image' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           files: ./coverage.xml # optional
@@ -42,7 +43,7 @@ jobs:
           verbose: true # optional (default = false)
 
       - name: Upload coverage data to coveralls.io
-        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/shape-of-image' }}
+        if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/gcloud-shape-of-image' }}
         run: |
           coveralls --service=github
         env:

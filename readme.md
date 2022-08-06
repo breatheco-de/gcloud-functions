@@ -3,7 +3,7 @@
 Install dependencies
 
 ```bash
-pipenv install
+pipenv install --dev
 ```
 
 Add environment
@@ -11,10 +11,4 @@ Add environment
 ```bash
 cp .env.example .env
 vscode .env
-```
-
-Run deploy
-
-```bash
-pipenv run deploy
 ```
