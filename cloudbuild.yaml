@@ -1,9 +1,9 @@
 steps:
 
-- name: 'gcr.io/kaniko-project/executor:latest'
-  args:
-  - --destination=docker.io/library/python:3.10
-  - --cache=true
+# - name: 'gcr.io/kaniko-project/executor:latest'
+#   args:
+#   - --destination=docker.io/library/python:3.10
+#   - --cache=true
 
 - name: 'docker.io/library/python:3.10'
   entrypoint: /bin/sh
