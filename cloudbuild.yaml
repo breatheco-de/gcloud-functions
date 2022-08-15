@@ -19,5 +19,5 @@ steps:
   args: ['config', 'set', 'compute/zone', 'us-central1-a']
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'shape-of-image', '-gen2', '--trigger-http', '--runtime', 'python310', '--entry-point', 'main']
+  args: ['functions', 'deploy', 'shape-of-image', '--gen2', '--trigger-http', '--runtime', 'python310', '--entry-point', 'main']
   dir: './'
