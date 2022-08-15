@@ -1,8 +1,14 @@
 #!/bin/env python
 
 import os
+import sys
 import json
+import re
 from pathlib import Path
+from shutil import which
+
+if which('gp'):
+    exit()
 
 api_path = os.getcwd()
 
@@ -21,8 +27,7 @@ if os.path.isfile(vscode_setting_path):
     with open(vscode_setting_path, 'r') as vscode_setting_file:
         vscode_setting_json = json.load(vscode_setting_file)
 
-vscode_setting_json['editor.formatOnSave'] = True
-vscode_setting_json['python.formatting.provider'] = 'yapf'
+vscode_setting_json['python.languageServer'] = 'Pylance'
 
 bad_keys = [key for key in vscode_setting_json if key.startswith('//')]
 for key in bad_keys:

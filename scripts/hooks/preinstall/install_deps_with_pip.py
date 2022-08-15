@@ -14,7 +14,6 @@ commands = ';\n'.join([
 ])
 
 exit_code = os.system(commands)
-print('PREINISTALL EXIT CODE', exit_code)
 
 # python don't return 256
 if exit_code:
