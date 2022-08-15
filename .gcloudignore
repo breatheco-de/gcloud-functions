@@ -167,7 +167,6 @@ dump.rdb
 /expected.html
 /index.html
 
-/requirements.txt
 *.json
 
 # Google Cloud
