@@ -25,22 +25,22 @@
   </a>
 </p>
 
-# Shape of Image
+## Shape of Image
 
-## `Install dependencies`
+### `Install dependencies`
 
 ```bash
 python -m scripts.install
 code .env # if your use Visual Studio Code the command is `code-insiders`
 ```
 
-## `Start dev server`
+### `Start dev server`
 
 ```bash
 pipenv run start
 ```
 
-## `Run tests`
+### `Run tests`
 
 ```bash
 # Testing
