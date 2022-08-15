@@ -13,24 +13,22 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python 3.10.5
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.10.5
-          cache: 'pipenv'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
           PYTHONUNBUFFERED=1
-          python -m pip install --upgrade pip
-          python -m pip install pipenv
-          pipenv install --dev --system --deploy --ignore-pipfile
+          pip install -r requirements-dev.txt
 
       - name: Test with pytest
         run: |
-          pipenv run pcov_ci
+          pytest --disable-pytest-warnings --cov=src --cov-report xml -n auto
 
       - uses: codecov/codecov-action@v1
         if: ${{ github.event_name == 'pull_request' || github.repository == 'breatheco-de/gcloud-shape-of-image' }}
