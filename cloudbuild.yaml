@@ -12,6 +12,9 @@ steps:
   args: [-c, 'pip install -r requirements-dev.txt && pytest --disable-pytest-warnings']
   dir: './'
 
+- name: gcr.io/cloud-builders/gcloud
+  args: ['config', 'set', 'compute/zone', 'us-central1-a']
+
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['functions', 'deploy', 'shape-of-image', '--trigger-http', '--runtime', 'python310', '--entry-point', 'main']
   dir: './'
