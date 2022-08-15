@@ -4,8 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-makerequeriments="pip freeze > requirements.txt"
-deploy="python -m scripts.deploy"
+start="functions-framework --target main --debug "
 format="pre-commit run --all-files"
 test="pytest --disable-pytest-warnings"
 ptest="pytest --disable-pytest-warnings -n auto"
