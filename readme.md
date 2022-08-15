@@ -2,11 +2,11 @@
   <br>
   <a href="https://breatheco.de/"><img src="https://assets.breatheco.de/apis/img/images.php?blob&random&cat=icon&tags=breathecode,128" alt="BreatheCode" width="128"></a>
   <br>
-  BreatheCode
+  Shape of Image
   <br>
 </h1>
 
-<h4 align="center">BreatheCode's mission is to <b>accelerate the way junior developers learn and evolve</b> using technology.</h4>
+<h4 align="center">Check the position and shape of the resource.</h4>
 
 <p align="center">
   <a href="https://coveralls.io/github/breatheco-de/gcloud-shape-of-image">
@@ -25,7 +25,7 @@
   </a>
 </p>
 
-## Shape of Image
+## Documentation
 
 ### `Install dependencies`
 
